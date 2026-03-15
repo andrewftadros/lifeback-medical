@@ -4,6 +4,7 @@ import HeroSection from '@components/HeroSection.astro';
 import BlogPostCard from '@components/BlogPostCard.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const toSlug = (id: string) => id.replace(/\.md$/, '');
 
 const allPosts = await getCollection('blog');
@@ -29,7 +30,7 @@ const formatDate = (date: Date) =>
 
       <!-- Featured Post -->
       {featured && (
-        <a href={`/blog/${toSlug(featured.id)}`} class="card block overflow-hidden mb-12 group">
+        <a href={`${base}/blog/${toSlug(featured.id)}`} class="card block overflow-hidden mb-12 group">
           <div class="md:flex">
             {featured.data.image && (
               <div class="md:w-1/2">

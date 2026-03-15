@@ -2,16 +2,17 @@
 import ContactForm from '@components/ContactForm.astro';
 
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const quickLinks = [
-  { name: 'Services', href: '/services' },
-  { name: 'Meet Our Doctors', href: '/doctors' },
-  { name: 'Locations', href: '/locations' },
-  { name: 'Testimonials', href: '/testimonials' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Book Online', href: '/book-online' },
-  { name: 'Preparing for Surgery', href: '/preparing-for-surgery' },
-  { name: 'Downloads', href: '/downloads' },
+  { name: 'Services', href: `${base}/services` },
+  { name: 'Meet Our Doctors', href: `${base}/doctors` },
+  { name: 'Locations', href: `${base}/locations` },
+  { name: 'Testimonials', href: `${base}/testimonials` },
+  { name: 'Blog', href: `${base}/blog` },
+  { name: 'Book Online', href: `${base}/book-online` },
+  { name: 'Preparing for Surgery', href: `${base}/preparing-for-surgery` },
+  { name: 'Downloads', href: `${base}/downloads` },
 ];
 
 const socialGroups = [

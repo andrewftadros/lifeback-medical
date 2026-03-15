@@ -9,6 +9,7 @@ import InsuranceBar from '@components/InsuranceBar.astro';
 import BlogPostCard from '@components/BlogPostCard.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const toSlug = (id: string) => id.replace(/\.md$/, '');
 
 const allServices = await getCollection('services');
@@ -32,7 +33,7 @@ const testimonials = [
   <HeroSection
     title="Get Your Life Back"
     subtitle="Compassionate, expert medical care to help you feel like yourself again. From consultations to recovery, we're with you every step of the way."
-    primaryCTA={{ text: 'Book Free Consultation', href: '/book-online' }}
+    primaryCTA={{ text: 'Book Free Consultation', href: `${base}/book-online` }}
     secondaryCTA={{ text: 'Call 951-547-2056', href: 'tel:9515472056' }}
   />
 
@@ -50,13 +51,13 @@ const testimonials = [
           <ServiceCard
             title={service.data.title}
             description={service.data.description}
-            href={`/services/${toSlug(service.id)}`}
+            href={`${base}/services/${toSlug(service.id)}`}
             image={service.data.image}
           />
         ))}
       </div>
       <div class="text-center mt-10">
-        <a href="/services" class="btn-outline">View All Services</a>
+        <a href={`${base}/services`} class="btn-outline">View All Services</a>
       </div>
     </div>
   </section>
@@ -68,7 +69,7 @@ const testimonials = [
         <!-- Left: clinic image placeholder -->
         <div class="rounded-card overflow-hidden shadow-md">
           <img
-            src="/images/doctors/team-photo.jpg"
+            src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/doctors/team-photo.jpg`}
             alt="Life Back Medical team"
             class="w-full h-full object-cover"
             loading="lazy"
@@ -106,7 +107,7 @@ const testimonials = [
             </li>
           </ul>
           <div class="mt-8">
-            <a href="/about" class="btn-primary">Meet Our Doctors</a>
+            <a href={`${base}/doctors`} class="btn-primary">Meet Our Doctors</a>
           </div>
         </div>
       </div>
@@ -132,7 +133,7 @@ const testimonials = [
         ))}
       </div>
       <div class="text-center mt-10">
-        <a href="/testimonials" class="btn-outline">Read More Stories</a>
+        <a href={`${base}/testimonials`} class="btn-outline">Read More Stories</a>
       </div>
     </div>
   </section>
@@ -159,7 +160,7 @@ const testimonials = [
           ))}
         </div>
         <div class="text-center mt-10">
-          <a href="/blog" class="btn-outline">Visit Our Blog</a>
+          <a href={`${base}/blog`} class="btn-outline">Visit Our Blog</a>
         </div>
       </div>
     </section>

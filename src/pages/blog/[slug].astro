@@ -12,6 +12,8 @@ export async function getStaticPaths() {
   }));
 }
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const { post } = Astro.props;
 const { Content } = await post.render();
 const formattedDate = post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -22,7 +24,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', { year: 'numeri
   <!-- Hero with Breadcrumb -->
   <section class="bg-gradient-to-br from-dark via-primary to-primary-light text-white py-16 md:py-24">
     <Breadcrumb items={[
-      { label: 'Blog', href: '/blog' },
+      { label: 'Blog', href: `${base}/blog` },
       { label: post.data.title },
     ]} />
     <div class="container-default px-4 text-center">
@@ -52,7 +54,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', { year: 'numeri
   <CTABanner
     title="Have questions? We're here to help."
     buttonText="Contact Us"
-    buttonHref="/contact"
+    buttonHref={`${base}/contact`}
   />
 
 </BaseLayout>

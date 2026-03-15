@@ -7,6 +7,8 @@ import { getCollection } from 'astro:content';
 
 const toSlug = (id: string) => id.replace(/\.md$/, '');
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const allServices = await getCollection('services');
 const services = allServices.sort((a, b) => a.data.order - b.data.order);
 ---
@@ -28,7 +30,7 @@ const services = allServices.sort((a, b) => a.data.order - b.data.order);
           <ServiceCard
             title={service.data.title}
             description={service.data.description}
-            href={`/services/${toSlug(service.id)}`}
+            href={`${base}/services/${toSlug(service.id)}`}
             image={service.data.image}
           />
         ))}

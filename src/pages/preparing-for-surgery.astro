@@ -2,6 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroSection from '@components/HeroSection.astro';
 import CTABanner from '@components/CTABanner.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="Preparing for Surgery" description="Important information to help you prepare for your procedure at Life Back Medical.">
@@ -41,8 +43,8 @@ import CTABanner from '@components/CTABanner.astro';
         </ul>
 
         <p>
-          All documents are available in our <a href="/downloads">Downloads Library</a>. If you have any questions about preparing
-          for your procedure, please don't hesitate to <a href="/contact">contact us</a> or call
+          All documents are available in our <a href={`${base}/downloads`}>Downloads Library</a>. If you have any questions about preparing
+          for your procedure, please don't hesitate to <a href={`${base}/contact`}>contact us</a> or call
           <a href="tel:9515472056">951-547-2056</a>.
         </p>
       </article>
@@ -53,7 +55,7 @@ import CTABanner from '@components/CTABanner.astro';
   <CTABanner
     title="Have questions about your upcoming procedure?"
     buttonText="Contact Us"
-    buttonHref="/contact"
+    buttonHref={`${base}/contact`}
   />
 
 </BaseLayout>

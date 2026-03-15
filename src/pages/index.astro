@@ -1,0 +1,168 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroSection from '@components/HeroSection.astro';
+import TrustBar from '@components/TrustBar.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import CTABanner from '@components/CTABanner.astro';
+import TestimonialCard from '@components/TestimonialCard.astro';
+import InsuranceBar from '@components/InsuranceBar.astro';
+import BlogPostCard from '@components/BlogPostCard.astro';
+import { getCollection } from 'astro:content';
+
+const toSlug = (id: string) => id.replace(/\.md$/, '');
+
+const allServices = await getCollection('services');
+const services = allServices.sort((a, b) => a.data.order - b.data.order);
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const testimonials = [
+  { quote: "There is no better Doctor. There is no better team, than that of Dr. Sedrak and his staff at Life Back Medical. They don't just meet the standard of a great clinic, they set the standard.", name: "Zackery D.", rating: 5 },
+  { quote: "Stellar surgeon, and unbelievably fantastic staff! I recovered quickly, with minimal scarring and no significant pain. I am healthier and happier as a result of Dr. Sedrak's work.", name: "Breanne K.", rating: 5 },
+  { quote: "Everything involved in my surgery with Dr. Sedrak was darn near perfect. They are incredibly thorough — with several pre-op calls and regular follow up after surgery. I HIGHLY recommend Dr. Sedrak.", name: "Brad Calkins", rating: 5 },
+];
+---
+
+<BaseLayout title="Home" description="Life Back Medical offers compassionate, expert care in Riverside County. Vein repair, weight loss, surgery, and more. Call 951-547-2056.">
+
+  <!-- 1. Hero Section -->
+  <HeroSection
+    title="Get Your Life Back"
+    subtitle="Compassionate, expert medical care to help you feel like yourself again. From consultations to recovery, we're with you every step of the way."
+    primaryCTA={{ text: 'Book Free Consultation', href: '/book-online' }}
+    secondaryCTA={{ text: 'Call 951-547-2056', href: 'tel:9515472056' }}
+  />
+
+  <!-- 2. Trust Bar -->
+  <TrustBar />
+
+  <!-- 3. Services Grid -->
+  <section class="section-padding bg-light-bg">
+    <div class="container-default fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold text-dark text-center mb-12">
+        Our Services
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {services.map((service) => (
+          <ServiceCard
+            title={service.data.title}
+            description={service.data.description}
+            href={`/services/${toSlug(service.id)}`}
+            image={service.data.image}
+          />
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/services" class="btn-outline">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Why Choose Us -->
+  <section class="section-padding bg-white">
+    <div class="container-default fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Left: clinic image placeholder -->
+        <div class="rounded-card overflow-hidden shadow-md">
+          <img
+            src="/images/clinic-exterior.jpg"
+            alt="Life Back Medical clinic"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <!-- Right: content -->
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold text-dark mb-6">
+            Why Choose Life Back Medical?
+          </h2>
+          <ul class="space-y-4 text-text">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong>Board-certified physicians</strong> with over 14 years of clinical experience</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong>Minimally invasive procedures</strong> for faster recovery and less downtime</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong>Nearly all PPO insurance plans</strong> accepted for your convenience</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-success flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span><strong>Same-week appointments</strong> available so you don't have to wait</span>
+            </li>
+          </ul>
+          <div class="mt-8">
+            <a href="/about" class="btn-primary">Meet Our Doctors</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CTA Banner -->
+  <CTABanner title="Ready to feel like yourself again?" />
+
+  <!-- 6. Testimonials -->
+  <section class="section-padding bg-light-bg">
+    <div class="container-default fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold text-dark text-center mb-12">
+        What Our Patients Say
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {testimonials.map((t) => (
+          <TestimonialCard
+            quote={t.quote}
+            name={t.name}
+            rating={t.rating}
+          />
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/testimonials" class="btn-outline">Read More Stories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Insurance Bar -->
+  <InsuranceBar />
+
+  <!-- 8. Blog Preview -->
+  {recentPosts.length > 0 && (
+    <section class="section-padding bg-white">
+      <div class="container-default fade-in">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark text-center mb-12">
+          Latest from Our Blog
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {recentPosts.map((post) => (
+            <BlogPostCard
+              title={post.data.title}
+              date={post.data.date}
+              excerpt={post.data.excerpt}
+              slug={toSlug(post.id)}
+              image={post.data.image}
+            />
+          ))}
+        </div>
+        <div class="text-center mt-10">
+          <a href="/blog" class="btn-outline">Visit Our Blog</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+</BaseLayout>

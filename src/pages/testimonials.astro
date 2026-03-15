@@ -1,0 +1,111 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroSection from '@components/HeroSection.astro';
+import TestimonialCard from '@components/TestimonialCard.astro';
+import CTABanner from '@components/CTABanner.astro';
+
+const testimonials = [
+  {
+    quote: "There is no better Doctor. There is no better team, than that of Dr. Sedrak and his staff at Life Back Medical. They don't just meet the standard of a great clinic, they set the standard. Within 3 days of calling, Greg had cleared me for surgery that same weekend, facilitated our insurance paperwork, and spoke with the clinical specialists to get me in as quickly as they possibly could.",
+    name: "Zackery D.",
+    source: "Yelp, Corona",
+    rating: 5,
+  },
+  {
+    quote: "Stellar surgeon, and unbelievably fantastic staff! My surgery was as close to 'a breeze' as I could have hoped for; I recovered quickly, with minimal scarring and no significant pain. Anytime I have a question I am able to text or call Dr. Sedrak's cell phone number... HE answers ALL of my questions in a quick response. I am healthier and happier as a result.",
+    name: "Breanne K.",
+    source: "Yelp, West Hollywood",
+    rating: 5,
+  },
+  {
+    quote: "Dr. Sedrak is amazingly thorough and patient explaining everything in advance. He is also very committed to success and garnered my trust and faith in his abilities and in his care for me. I cannot thank him enough and highly recommend him... he is worth the wait!",
+    name: "Candy",
+    source: "HealthGrades, Orange County",
+    rating: 5,
+  },
+  {
+    quote: "Everything involved in my surgery with Dr. Sedrak was darn near perfect. They are incredibly thorough — with several pre-op calls and regular follow up after surgery to make sure I was OK. The surgery went perfect, I'm all healed up, and I HIGHLY recommend Dr. Sedrak.",
+    name: "Brad Calkins",
+    source: "Google",
+    rating: 5,
+  },
+  {
+    quote: "I had a terrific experience with Dr. Sedrak and his staff. They were extremely thorough, calling multiple times before the operation with explanation of the procedure and detailed instructions. The surgery went perfectly and I'm now healed up with barely a scar. They still check in on me over 2 months later!",
+    name: "Brad",
+    source: "HealthGrades, Woodland Hills",
+    rating: 5,
+  },
+  {
+    quote: "Dr. Sedrak knows me by name. He knows my case. He UNDERSTANDS because he's been there. I'm not just another dollar. He really cares. He saved my life and gave my daughter her mom back! I'm FOREVER grateful!",
+    name: "Kristin Kiki B.",
+    source: "Yelp, Corona",
+    rating: 5,
+  },
+  {
+    quote: "It's been 13 months since my surgery. I have dropped 130 pounds over 7 months (320 to 190lbs) and my results are permanent. My life has changed and I feel amazing. Getting the Gastric Sleeve by Doctor Sedrak is the best decision I have ever made!",
+    name: "Percival G.",
+    source: "Yelp, Corona",
+    rating: 5,
+  },
+  {
+    quote: "Dr. Sedrak, is GOD sent. Five months later, I am 128 lbs. I am no longer taking any medications for both high blood pressure and high cholesterol. He treated me as a human being not a statistic; his bedside manner and his professionalism were above and beyond. NO surgeon had ever called me to check on me. I knew this doctor really cares.",
+    name: "MJOver1",
+    source: "RealSelf",
+    rating: 5,
+  },
+  {
+    quote: "Every step of the way, I found support and answers. They work extremely hard to make sure you are comfortable and taken care of. Caring and professional, I wish I would have contacted Dr Sedrak sooner! They worked with my insurance to get everything approved and completed in a timely manner! A perfect 5 star experience!",
+    name: "Jackie Wright",
+    source: "Google",
+    rating: 5,
+  },
+  {
+    quote: "Dr. Sedrak and his office are amazing. I've never had a doctor take such good care of me. He set up the surgery in a day due to my demanding schedule. And he and his office found the best location to have it done that would accommodate my insurance. When there was a problem with the pharmacy on the weekend he took time to personally handle it.",
+    name: "David P.",
+    source: "Facebook",
+    rating: 5,
+  },
+  {
+    quote: "I was suffering from a hiatal hernia and also needed my gallbladder removed. Dr. Sedrak performed all three of my surgeries within a three month time frame. His staff stayed in constant contact with me throughout. My sleeve surgery took place on July 29th and I have since lost 43 lbs. Dr Sedrak saved my life.",
+    name: "JackieMarie W.",
+    source: "Yelp, Corona",
+    rating: 5,
+  },
+  {
+    quote: "Getting 'The Sleeve' operation was one of the best decisions of my life. By Christmas I was down to 214 pounds! A few weeks after my surgery, I had the urge to play the piano — and I've been playing nearly every day since. These are real miracles to me, and are the direct results of having this surgery.",
+    name: "Leroy D.",
+    source: "Facebook",
+    rating: 5,
+  },
+];
+---
+
+<BaseLayout title="Testimonials" description="Read what our patients have to say about their experience at Life Back Medical. Real stories from real patients.">
+
+  <!-- Hero -->
+  <HeroSection
+    title="Patient Testimonials"
+    subtitle="Real stories from real patients"
+    size="short"
+  />
+
+  <!-- Testimonials Grid -->
+  <section class="section-padding bg-light-bg">
+    <div class="container-default fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {testimonials.map((t) => (
+          <TestimonialCard
+            quote={t.quote}
+            name={t.name}
+            rating={t.rating}
+            source={t.source}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTABanner title="Ready to become our next success story?" />
+
+</BaseLayout>

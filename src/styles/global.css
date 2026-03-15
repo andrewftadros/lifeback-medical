@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-light-bg text-text font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-dark;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-card
+           hover:bg-primary-light transition-colors duration-200 focus:outline-none focus:ring-2
+           focus:ring-primary focus:ring-offset-2;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-accent text-dark font-semibold rounded-card
+           hover:brightness-110 transition-all duration-200 focus:outline-none focus:ring-2
+           focus:ring-accent focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold
+           rounded-card hover:bg-primary hover:text-white transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .card {
+    @apply bg-white rounded-card shadow-md hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 px-4 md:px-8 lg:px-16;
+  }
+
+  .container-default {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,19 @@
+---
+// Simple redirect page — no BaseLayout needed.
+// Replace the URL below with the actual Wix booking URL.
+const redirectURL = 'https://REPLACE-WITH-WIX-DIRECT-URL/book-online';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0; url=${redirectURL}`} />
+    <title>Redirecting to Book Online...</title>
+  </head>
+  <body style="font-family: sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0;">
+    <p>
+      Redirecting to our booking page... If you are not redirected,
+      <a href={redirectURL}>click here</a>.
+    </p>
+  </body>
+</html>

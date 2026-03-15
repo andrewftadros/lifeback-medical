@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroSection from '@components/HeroSection.astro';
+import CTABanner from '@components/CTABanner.astro';
+---
+
+<BaseLayout title="Preparing for Surgery" description="Important information to help you prepare for your procedure at Life Back Medical.">
+
+  <!-- Hero -->
+  <HeroSection
+    title="Preparing for Surgery"
+    subtitle="Everything you need to know before your procedure"
+    size="short"
+  />
+
+  <!-- Content -->
+  <section class="section-padding bg-white">
+    <div class="container-default">
+      <article class="max-w-3xl mx-auto prose prose-lg">
+        <p>
+          We take the utmost care to provide our patients with stellar surgical experiences. However, we realize that surgery
+          is still surgery and will never replace a walk in the park.
+        </p>
+        <p>
+          In an effort to make your surgery run smoother, we're providing you with links to great pre-operative information below.
+        </p>
+
+        <h2>Pre-Operative Information Packets</h2>
+        <ul>
+          <li><strong>Gastric Band (LAP-BAND&reg;)</strong> — Pre-Operative Information Packet</li>
+          <li><strong>Gastric Sleeve</strong> — Pre-Operative Information Packet</li>
+          <li><strong>What To Know About Medication &amp; Surgery</strong> — Information Packet</li>
+          <li><strong>Quitting Smoking Before Surgery</strong> — Download Packet</li>
+        </ul>
+
+        <h2>Pre-Operative Forms</h2>
+        <ul>
+          <li>Pre-Operative Instructions Sheet</li>
+          <li>Pre-Operative Orders Sheet</li>
+          <li>Pre-Operative Studies Sheet</li>
+        </ul>
+
+        <p>
+          All documents are available in our <a href="/downloads">Downloads Library</a>. If you have any questions about preparing
+          for your procedure, please don't hesitate to <a href="/contact">contact us</a> or call
+          <a href="tel:9515472056">951-547-2056</a>.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTABanner
+    title="Have questions about your upcoming procedure?"
+    buttonText="Contact Us"
+    buttonHref="/contact"
+  />
+
+</BaseLayout>

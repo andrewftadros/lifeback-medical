@@ -1,0 +1,136 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroSection from '@components/HeroSection.astro';
+
+const downloads = [
+  {
+    name: "Dr. Sedrak's Open Letter",
+    description: 'A personal letter from our Medical Director.',
+    href: '#',
+  },
+  {
+    name: 'Life Back Medical Referral One-Sheet',
+    description: 'Share our services with colleagues and referring physicians.',
+    href: '#',
+  },
+  {
+    name: 'Review of System',
+    description: 'Comprehensive system review form for new patients.',
+    href: '#',
+  },
+  {
+    name: 'Gastric Band (LAP-BAND\u00ae) Pre-Operative Information Packet',
+    description: 'Everything you need to know before your LAP-BAND procedure.',
+    href: '#',
+  },
+  {
+    name: 'Gastric Sleeve Pre-Operative Information Packet',
+    description: 'Preparation guide for gastric sleeve surgery.',
+    href: '#',
+  },
+  {
+    name: 'Laparoscopic Gallbladder Removal (Cholecystectomy) Information Packet',
+    description: 'Information about gallbladder removal surgery and preparation.',
+    href: '#',
+  },
+  {
+    name: 'Green Zone Questionnaire',
+    description: 'Post-operative questionnaire for LAP-BAND patients.',
+    href: '#',
+  },
+  {
+    name: 'Face-to-Face Evaluation',
+    description: 'Evaluation form for in-person consultations.',
+    href: '#',
+  },
+  {
+    name: 'STOP-Bang Questionnaire',
+    description: 'Screening questionnaire for obstructive sleep apnea.',
+    href: '#',
+  },
+  {
+    name: 'Berlin Questionnaire',
+    description: 'Sleep apnea risk assessment questionnaire.',
+    href: '#',
+  },
+  {
+    name: 'Epworth Sleepiness Scale Sheet',
+    description: 'Measure your level of daytime sleepiness.',
+    href: '#',
+  },
+  {
+    name: 'Arbitration Agreement',
+    description: 'Patient arbitration agreement document.',
+    href: '#',
+  },
+  {
+    name: 'What To Know About Medication & Surgery',
+    description: 'Important information about medications before and after surgery.',
+    href: '#',
+  },
+  {
+    name: 'Quitting Smoking Before Surgery',
+    description: 'Guidelines for stopping smoking before your procedure.',
+    href: '#',
+  },
+  {
+    name: 'Pre-Operative Instructions Sheet',
+    description: 'Step-by-step instructions to prepare for your surgery.',
+    href: '#',
+  },
+  {
+    name: 'Pre-Operative Orders Sheet',
+    description: 'Orders and requirements before your scheduled procedure.',
+    href: '#',
+  },
+  {
+    name: 'Pre-Operative Studies Sheet',
+    description: 'Required studies and tests before surgery.',
+    href: '#',
+  },
+];
+---
+
+<BaseLayout title="Downloads" description="Download patient forms, medical history questionnaires, and other resources from Life Back Medical.">
+
+  <!-- Hero -->
+  <HeroSection
+    title="Downloads Library"
+    subtitle="Patient forms and helpful resources"
+    size="short"
+  />
+
+  <!-- Downloads List -->
+  <section class="section-padding bg-light-bg">
+    <div class="container-default">
+      <div class="max-w-3xl mx-auto space-y-4">
+        {downloads.map((doc) => (
+          <a href={doc.href} class="card block p-6 group">
+            <div class="flex items-start gap-4">
+              <!-- Download icon -->
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <!-- Content -->
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-bold text-dark group-hover:text-primary transition-colors">
+                  {doc.name}
+                </h3>
+                <p class="text-muted text-sm mt-1">
+                  {doc.description}
+                </p>
+              </div>
+              <!-- Arrow -->
+              <svg class="w-5 h-5 text-muted flex-shrink-0 mt-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

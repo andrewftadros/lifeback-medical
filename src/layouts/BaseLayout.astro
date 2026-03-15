@@ -1,0 +1,106 @@
+---
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Life Back Medical — Comprehensive medical services in Riverside County. Vein repair, weight loss, surgery, and more. Call 951-547-2056.',
+  ogImage = '/images/og-default.jpg',
+  noindex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title} | Life Back Medical</title>
+    <meta name="description" content={description} />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | Life Back Medical`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | Life Back Medical`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Reachcode Tracking -->
+    <script type="text/javascript" src="//cdn.rlets.com/capture_configs/748/879/bab/2d846a99ab34826f795addf.js" async="async"></script>
+
+    <!-- LocalBusiness Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "name": "Life Back Medical",
+        "telephone": "+1-951-547-2056",
+        "email": "info@lifebackmedical.com",
+        "url": "https://www.lifebackmedical.com",
+        "openingHours": "Mo-Sa 09:00-19:00",
+        "sameAs": [
+          "https://www.instagram.com/lifebackmedical/",
+          "https://www.facebook.com/officallifebackmedical/",
+          "https://www.youtube.com/channel/UCi5P11phorkXUYexj6CV--Q"
+        ]
+      }
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-card">
+      Skip to main content
+    </a>
+
+    <Header />
+
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Scroll fade-in observer -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll('.fade-in').forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import HeroSection from '@components/HeroSection.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import CTABanner from '@components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const toSlug = (id: string) => id.replace(/\.md$/, '');
+
+const allServices = await getCollection('services');
+const services = allServices.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Our Services" description="Explore our comprehensive medical services including vein repair, weight loss, hernia repair, and more. Life Back Medical — Riverside County.">
+
+  <!-- Hero -->
+  <HeroSection
+    title="Our Services"
+    subtitle="Comprehensive care for every part of your health"
+    size="short"
+  />
+
+  <!-- Services Grid -->
+  <section class="section-padding bg-light-bg">
+    <div class="container-default fade-in">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((service) => (
+          <ServiceCard
+            title={service.data.title}
+            description={service.data.description}
+            href={`/services/${toSlug(service.id)}`}
+            image={service.data.image}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTABanner
+    title="Not sure which service you need?"
+    buttonText="Book a Free Consultation"
+  />
+
+</BaseLayout>

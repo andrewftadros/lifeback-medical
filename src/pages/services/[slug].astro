@@ -1,0 +1,131 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Breadcrumb from '@components/Breadcrumb.astro';
+import CTABanner from '@components/CTABanner.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import { getCollection } from 'astro:content';
+
+const toSlug = (id: string) => id.replace(/\.md$/, '');
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((service) => ({
+    params: { slug: service.id.replace(/\.md$/, '') },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { Content } = await service.render();
+
+const allServices = await getCollection('services');
+const relatedSlugs = service.data.relatedServices || [];
+const relatedServices = allServices.filter((s) => relatedSlugs.includes(s.id)).slice(0, 3);
+---
+
+<BaseLayout title={service.data.title} description={service.data.description}>
+
+  <!-- Short Hero with Breadcrumb -->
+  <section class="bg-gradient-to-br from-dark via-primary to-primary-light text-white py-16 md:py-24">
+    <Breadcrumb items={[
+      { label: 'Services', href: '/services' },
+      { label: service.data.title },
+    ]} />
+    <div class="container-default px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-white">
+        {service.data.title}
+      </h1>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="section-padding bg-white">
+    <div class="container-default">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        <div class="prose prose-lg max-w-none">
+          <Content />
+        </div>
+        {service.data.image && (
+          <div class="rounded-card overflow-hidden shadow-md">
+            <img
+              src={service.data.image}
+              alt={service.data.title}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Expect -->
+  <section class="section-padding bg-light-bg">
+    <div class="container-default fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold text-dark text-center mb-12">
+        What to Expect
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold">
+            1
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-2">Consultation</h3>
+          <p class="text-muted">
+            Meet with our board-certified physicians to discuss your symptoms, medical history, and treatment options.
+          </p>
+        </div>
+        <!-- Step 2 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold">
+            2
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-2">Treatment</h3>
+          <p class="text-muted">
+            Receive personalized, minimally invasive treatment tailored to your specific condition and health goals.
+          </p>
+        </div>
+        <!-- Step 3 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold">
+            3
+          </div>
+          <h3 class="text-xl font-bold text-dark mb-2">Recovery</h3>
+          <p class="text-muted">
+            Our team supports you through recovery with follow-up care and guidance to get you back to feeling your best.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <CTABanner
+    title="Ready to take the next step?"
+    secondaryText="Call 951-547-2056"
+    secondaryHref="tel:9515472056"
+  />
+
+  <!-- Related Services -->
+  {relatedServices.length > 0 && (
+    <section class="section-padding bg-white">
+      <div class="container-default fade-in">
+        <h2 class="text-3xl md:text-4xl font-bold text-dark text-center mb-12">
+          Related Services
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedServices.map((s) => (
+            <ServiceCard
+              title={s.data.title}
+              description={s.data.description}
+              href={`/services/${toSlug(s.id)}`}
+              image={s.data.image}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+</BaseLayout>

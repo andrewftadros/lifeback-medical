@@ -1,0 +1,28 @@
+# Service pages: top-level → /services/*
+/vein-repair /services/vein-repair 301
+/weightloss /services/weight-loss 301
+/sleep-studies-and-treatments /services/sleep-studies 301
+/cancer-prevention /services/cancer-prevention 301
+/heartburn-relief /services/heartburn-relief 301
+/knee-and-back-pain-treatments /services/knee-back-pain 301
+/hernia-repair /services/hernia-repair 301
+/gallbladder-surgery /services/gallbladder-surgery 301
+/hemorrhoid-procedures /services/hemorrhoid-procedures 301
+/plastic-surgery /services/plastic-surgery 301
+/colon-and-appendix-surgeries /services/colon-appendix-surgery 301
+/corporate-wellness /services/corporate-wellness 301
+
+# Other page renames
+/lifebackmedicalservices /services 301
+/meet-our-medical-director /doctors 301
+/stories /testimonials 301
+/before-and-afters /testimonials 301
+/downloads-library /downloads 301
+
+# Blog: /post/* → /blog/*
+/post/* /blog/:splat 301
+
+# Booking: redirect to Wix direct URL
+# TODO: Update these with actual Wix direct URL after confirming
+# /service-page/* https://username.wixsite.com/lifebackmedical/service-page/:splat 301
+# /booking-calendar/* https://username.wixsite.com/lifebackmedical/booking-calendar/:splat 301

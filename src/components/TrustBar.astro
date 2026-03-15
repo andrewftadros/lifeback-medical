@@ -1,0 +1,25 @@
+---
+const stats = [
+  { value: '14+', label: 'Years in Practice' },
+  { value: '10,000+', label: 'Patients Served' },
+  { value: '12', label: 'Specialized Services' },
+  { value: '2', label: 'Locations' },
+];
+---
+
+<section class="section-padding bg-white fade-in">
+  <div class="container-default">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      {stats.map((stat) => (
+        <div class="text-center">
+          <p class="text-4xl md:text-5xl font-bold text-primary mb-2">
+            {stat.value}
+          </p>
+          <p class="text-muted text-sm md:text-base">
+            {stat.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,103 @@
+---
+interface Props {
+  compact?: boolean;
+  idPrefix?: string;
+}
+
+const { compact = false, idPrefix = '' } = Astro.props;
+
+const prefix = idPrefix ? `${idPrefix}-` : '';
+---
+
+<form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+  <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
+
+  <!-- Honeypot -->
+  <div class="hidden">
+    <label>
+      Don't fill this out
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <div class:list={[compact ? 'space-y-3' : 'grid md:grid-cols-2 gap-4']}>
+    <!-- Name -->
+    <div>
+      <label for={`${prefix}name`} class="block text-sm font-medium mb-1">
+        Name <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        id={`${prefix}name`}
+        name="name"
+        required
+        class="w-full px-4 py-2.5 border border-gray-300 rounded-card text-text bg-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+        placeholder="Your name"
+      />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for={`${prefix}email`} class="block text-sm font-medium mb-1">
+        Email <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="email"
+        id={`${prefix}email`}
+        name="email"
+        required
+        class="w-full px-4 py-2.5 border border-gray-300 rounded-card text-text bg-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+        placeholder="your@email.com"
+      />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label for={`${prefix}phone`} class="block text-sm font-medium mb-1">
+        Phone
+      </label>
+      <input
+        type="tel"
+        id={`${prefix}phone`}
+        name="phone"
+        class="w-full px-4 py-2.5 border border-gray-300 rounded-card text-text bg-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+        placeholder="(951) 547-2056"
+      />
+    </div>
+
+    <!-- Subject (hidden when compact) -->
+    {!compact && (
+      <div>
+        <label for={`${prefix}subject`} class="block text-sm font-medium mb-1">
+          Subject
+        </label>
+        <input
+          type="text"
+          id={`${prefix}subject`}
+          name="subject"
+          class="w-full px-4 py-2.5 border border-gray-300 rounded-card text-text bg-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+          placeholder="How can we help?"
+        />
+      </div>
+    )}
+  </div>
+
+  <!-- Message -->
+  <div>
+    <label for={`${prefix}message`} class="block text-sm font-medium mb-1">
+      Message <span class="text-red-500">*</span>
+    </label>
+    <textarea
+      id={`${prefix}message`}
+      name="message"
+      required
+      rows={compact ? 3 : 5}
+      class="w-full px-4 py-2.5 border border-gray-300 rounded-card text-text bg-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors resize-y"
+      placeholder="Tell us about your needs..."
+    ></textarea>
+  </div>
+
+  <button type="submit" class="btn-primary w-full">
+    Send Message
+  </button>
+</form>

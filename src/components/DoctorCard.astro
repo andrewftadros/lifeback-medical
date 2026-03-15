@@ -1,0 +1,38 @@
+---
+interface Props {
+  name: string;
+  specialty: string;
+  bio: string;
+  image?: string;
+  bookingHref?: string;
+}
+
+const { name, specialty, bio, image, bookingHref = '/book-online' } = Astro.props;
+
+// Extract a short display name like "Dr. Sedrak" from "Dr. Michael Sedrak, M.D."
+const parts = name.replace(/,.*$/, '').split(' ');
+const firstName = parts.length >= 3 ? `${parts[0]} ${parts[parts.length - 1]}` : parts[0];
+---
+
+<div class="card overflow-hidden md:flex">
+  {image && (
+    <div class="md:w-1/3 shrink-0">
+      <img
+        src={image}
+        alt={name}
+        class="w-full h-64 md:h-full object-cover"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class:list={['p-6 md:p-8 flex flex-col justify-center', image ? 'md:w-2/3' : 'w-full']}>
+    <h3 class="text-2xl font-bold text-dark mb-1">{name}</h3>
+    <p class="text-primary font-semibold mb-4">{specialty}</p>
+    <p class="text-muted leading-relaxed mb-6">{bio}</p>
+    <div>
+      <a href={bookingHref} class="btn-primary">
+        Book with {firstName}
+      </a>
+    </div>
+  </div>
+</div>
